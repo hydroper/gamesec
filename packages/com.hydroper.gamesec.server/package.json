@@ -1,0 +1,12 @@
+{
+  "name": "com.hydroper.gamesec.client",
+  "version": "0.1.0",
+  "scripts": {},
+  "main": "ts/index.ts",
+  "dependencies": {
+    "@types/ws": "^8.5.6",
+    "com.hydroper.gamesec.core": "file:../com.hydroper.gamesec.core",
+    "com.hydroper.gamesec.physics2D": "file:../com.hydroper.gamesec.physics2D",
+    "ws": "^8.14.2"
+  }
+}

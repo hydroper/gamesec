@@ -1,0 +1,13 @@
+{
+  "name": "com.hydroper.gamesec.client",
+  "version": "0.1.0",
+  "scripts": {},
+  "main": "ts/index.ts",
+  "dependencies": {
+    "@types/assert": "^1.5.7",
+    "assert": "^2.1.0",
+    "com.hydroper.gamesec.core": "file:../com.hydroper.gamesec.core",
+    "com.hydroper.gamesec.display2D": "file:../com.hydroper.gamesec.display2D"
+  },
+  "devDependencies": {}
+}

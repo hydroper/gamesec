@@ -1,0 +1,10 @@
+{
+  "name": "com.hydroper.gamesec.core",
+  "version": "0.1.0",
+  "scripts": {},
+  "main": "ts/index.ts",
+  "dependencies": {
+    "com.hydroper.gamesec.geom2D": "file:../com.hydroper.gamesec.geom2D",
+    "com.hydroper.gamesec.util": "file:../com.hydroper.gamesec.util"
+  }
+}
