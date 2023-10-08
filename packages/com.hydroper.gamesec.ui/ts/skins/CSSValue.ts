@@ -7,5 +7,6 @@
  * - [\<gradient\>](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient)
  * - [\<color\>](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
  * - [\<image\>](https://developer.mozilla.org/en-US/docs/Web/CSS/image)
+ * - [\<time\>](https://developer.mozilla.org/en-US/docs/Web/CSS/time)
  */
 export type CSSValue = string;
