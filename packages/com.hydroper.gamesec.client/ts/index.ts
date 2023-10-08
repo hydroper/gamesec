@@ -1,6 +1,6 @@
 export * from "com.hydroper.gamesec.core";
 export * from "com.hydroper.gamesec.display2D";
-export * from "com.hydroper.gamesec.ui";
+export * as ui from "com.hydroper.gamesec.ui";
 
 import Input from "./Input";
 export { Input };
