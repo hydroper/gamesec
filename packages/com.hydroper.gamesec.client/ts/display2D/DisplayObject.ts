@@ -10,7 +10,7 @@ export const displayObjectConstructorToken = Symbol();
 /**
  * A 2D display object.
  */
-export default class DisplayObject {
+export default abstract class DisplayObject {
     constructor(token: Symbol) {
         assert(token === displayObjectConstructorToken, "DisplayObject must not be constructed directly");
     }

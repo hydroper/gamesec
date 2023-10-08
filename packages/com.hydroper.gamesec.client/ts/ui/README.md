@@ -19,11 +19,11 @@ Controls:
   - `..` indicates ascending child
 - [ ] Base `Control`
   - `id`
-    - [ ] This is the control's identifier used by control paths
+    - [x] This is the control's identifier used by control paths
   - `focusNeighbor`
     - [ ] Contains optional paths to left, right, top and bottom neighbors respectively, such as in `control.focusNeighbor.top = "../.last"`
-    - [ ] When a control is focused and the respective neighbor whose input action is pressed and that neighbor has no control path set by the control, the NPM `focus-lock` package should be used for previous/next navigations respectively (left | top = previous, right | bottom = next).
-    - [ ] Children, similiar to `Container` display objects. In addition, adding and removing a single child modifies the underlying DOM. Removing all children also modifies the underlying DOM.
+    - [ ] When a focusable control is focused and the respective neighbor whose input action is pressed and that neighbor has no control path set by the control, the NPM `focus-lock` package should be used for previous/next navigations respectively (left | top = previous, right | bottom = next).
+    - [x] Children, similiar to `Container` display objects. In addition, adding and removing a single child modifies the underlying DOM. Removing all children also modifies the underlying DOM.
 - [ ] Application (uses `prefix-application` class)
 - [ ] Button
   - [ ] Text (direct inner text)
