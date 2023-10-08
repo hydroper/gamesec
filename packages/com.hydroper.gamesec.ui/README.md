@@ -2,6 +2,9 @@
 
 ## To do
 
+- [ ] Root (uses `prefix-root` class)
+- [ ] Button
+  - [ ] Text (direct inner text)
 - [ ] Fonts
 - [ ] Events, such as `onHover`, `onFocus`, `onPressed`
 - [ ] Transitions
