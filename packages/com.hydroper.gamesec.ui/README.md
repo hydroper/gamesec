@@ -2,6 +2,7 @@
 
 ## To do
 
+- [ ] Fonts
 - [ ] Events, such as `onHover`, `onFocus`, `onPressed`
 - [ ] Transitions
 - [ ] Animations

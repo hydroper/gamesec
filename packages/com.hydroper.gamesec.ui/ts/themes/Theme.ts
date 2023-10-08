@@ -7,6 +7,10 @@ export class Theme {
     private mStyle: HTMLStyleElement;
     private mPrefix: string;
 
+    readonly controls: ThemeControls;
+    readonly fonts: ThemeFonts;
+    readonly defaultFont: string;
+
     /**
      * Constructs a theme.
      * 
@@ -17,8 +21,12 @@ export class Theme {
      */
     constructor(
         public readonly themeClass: string,
-        public readonly controls: ThemeControls,
+        public readonly options: ThemeOptions,
     ) {
+        this.controls = options.controls;
+        this.fonts = options.fonts;
+        this.defaultFont = options.defaultFont;
+
         // Set stylesheet class prefix
         this.mPrefix = `.${this.themeClass}-theme-`;
 
@@ -53,6 +61,7 @@ export class Theme {
         builder.push(
             `${prefix}-root {` +
                 "user-select: none;" +
+                `font-family: ${this.defaultFont};` +
             "}"
         );
 
@@ -61,3 +70,13 @@ export class Theme {
         return builder.join("");
     }
 }
+
+export type ThemeOptions = {
+    controls: ThemeControls,
+    fonts: ThemeFonts,
+
+    /**
+     * Default CSS font family.
+     */
+    defaultFont: string,
+};
