@@ -1,7 +1,11 @@
 import { CSSValue, Padding, RectangleSkin, Transition } from "../skins";
 
 export type ThemeControls = {
-    button?: ThemeButton,
+    button?: {
+        primary: ThemeButton,
+        secondary: ThemeButton,
+        warning: ThemeButton,
+    },
     label?: ThemeLabel,
 };
 
