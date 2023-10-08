@@ -58,9 +58,9 @@ export class Theme {
             "}"
         );
 
-        // prefix-root
+        // prefix-application
         builder.push(
-            `${prefix}-root {` +
+            `${prefix}-application {` +
                 "user-select: none;" +
                 `font-family: ${this.defaultFont};` +
             "}"

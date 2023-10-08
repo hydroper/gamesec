@@ -1,9 +1,9 @@
 type YPosition = { y: number };
 
 /**
- * Sorts an array of entities by Z in-place.
+ * Sorts an array of entities by Y in-place.
  */
-export default function sortObjectsByZ(array: YPosition[]) {
+export default function ySort(array: YPosition[]) {
     const n = array.length;
     let i = 0, j = 0;
     for (i = 0; i < n - 1; ++i) {

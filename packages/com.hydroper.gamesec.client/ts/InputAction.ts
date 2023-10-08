@@ -2,7 +2,8 @@
  * Part of the Input API. It is used to describe a specific user input key or gamepad
  * button.
  */
-export type InputActionAtom = InputActionKey;
+export type InputActionAtom =
+    | InputActionKey;
 
 /**
  * Part of the Input API. It is used to describe a specific user input key.
@@ -41,7 +42,7 @@ export type InputActionKeyName =
     | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m"
     | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
 
-const navigatorKeyToProgramKeyNames = new Map<string, InputActionKeyName>([
+const navigatorKeyToActualKeyNames = new Map<string, InputActionKeyName>([
     ["arrowleft", "leftArrow"],
     ["arrowright", "rightArrow"],
     ["arrowup", "upArrow"],
@@ -54,10 +55,10 @@ const navigatorKeyToProgramKeyNames = new Map<string, InputActionKeyName>([
     ["tab", "tab"],
 ]);
 
-export function translateNavigatorKeyToProgramKeyName(name: string): InputActionKeyName | undefined {
+export function navigatorKeyToActualKeyName(name: string): InputActionKeyName | undefined {
     name = name.toLowerCase();
     if (/a-z0-9|f\d\d?/.test(name)) {
         return name as any;
     }
-    return navigatorKeyToProgramKeyNames.get(name);
+    return navigatorKeyToActualKeyNames.get(name);
 }

@@ -1,4 +1,4 @@
-# com.hydroper.gamesec.display2D
+# display2D
 
 ## To do
 

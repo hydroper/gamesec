@@ -7,8 +7,8 @@
     "@types/assert": "^1.5.7",
     "assert": "^2.1.0",
     "com.hydroper.gamesec.core": "file:../com.hydroper.gamesec.core",
-    "com.hydroper.gamesec.display2D": "file:../com.hydroper.gamesec.display2D",
-    "com.hydroper.gamesec.ui": "file:../com.hydroper.gamesec.ui"
+    "com.hydroper.gamesec.ui": "file:../com.hydroper.gamesec.ui",
+    "two.js": "^0.8.11"
   },
   "devDependencies": {}
 }

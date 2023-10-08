@@ -1,5 +1,5 @@
 import { EventEmitter, clonePlainObject } from "com.hydroper.gamesec.core";
-import { InputActionAtom, InputActionKeyName, translateNavigatorKeyToProgramKeyName } from "./InputAction";
+import { InputActionAtom, InputActionKey, InputActionKeyName, navigatorKeyToActualKeyName } from "./InputAction";
 import assert from "assert";
 
 /**
@@ -86,7 +86,7 @@ export default class Input {
 
     static {
         window.addEventListener("keydown", evt => {
-            const keyName = translateNavigatorKeyToProgramKeyName(evt.key);
+            const keyName = navigatorKeyToActualKeyName(evt.key);
             if (keyName !== undefined) {
                 // Mutate pressed state
                 let state = Input.mPressedStatePoolKeys.get(keyName);
@@ -110,7 +110,7 @@ export default class Input {
         });
 
         window.addEventListener("keyup", evt => {
-            const keyName = translateNavigatorKeyToProgramKeyName(evt.key);
+            const keyName = navigatorKeyToActualKeyName(evt.key);
             if (keyName !== undefined) {
                 // Mutate pressed state
                 let state = Input.mPressedStatePoolKeys.get(keyName);
@@ -142,12 +142,13 @@ export default class Input {
         const action = Input.mMap[name];
         assert(action !== undefined, "The specified action for Input.isPressed(name) does not exist.");
         for (const item of action!) {
-            if (item.key !== undefined) {
-                const pressedState = Input.mPressedStatePoolKeys.get(item.key);
+            if (item.hasOwnProperty("key")) {
+                const inputActionKey = item as InputActionKey;
+                const pressedState = Input.mPressedStatePoolKeys.get(inputActionKey.key);
                 return pressedState !== undefined && pressedState.pressed
-                    && (item.control ? pressedState.control : !pressedState.control)
-                    && (item.shift ? pressedState.shift : !pressedState.shift)
-                    && (item.alt ? pressedState.alt : !pressedState.alt);
+                    && (inputActionKey.control ? pressedState.control : !pressedState.control)
+                    && (inputActionKey.shift ? pressedState.shift : !pressedState.shift)
+                    && (inputActionKey.alt ? pressedState.alt : !pressedState.alt);
             }
         }
         return false;

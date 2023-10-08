@@ -16,5 +16,5 @@ export { ImageLoader };
 import ImageLoaderProgressEvent from "./ImageLoaderProgressEvent";
 export { ImageLoaderProgressEvent };
 
-import sortObjectsByZ from "./sortObjectsByZ";
-export { sortObjectsByZ };
+import ySort from "./ySort";
+export { ySort };
