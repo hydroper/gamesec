@@ -1,4 +1,5 @@
 import { ThemeControls } from "./ThemeControls";
+import { ThemeFonts } from "./ThemeFonts";
 
 /**
  * An user interface theme.
