@@ -70,6 +70,24 @@ export default class Input {
         this.onMapUpdate.emit(undefined);
     }
 
+    /**
+     * Returns an input map containing user interface actions, in read-only mode.
+     * The map will contain the following actions:
+     * 
+     * * `uiLeft` — Used for focusing the left neighbor of a control.
+     * * `uiRight` — Used for focusing the right neighbor of a control.
+     * * `uiUp` — Used for focusing the top neighbor of a control.
+     * * `uiDown` — Used for focusing the bottom neighbor of a control.
+     */
+    static defaultUIMap(): Record<string, InputActionAtom[]> {
+        return {
+            "uiLeft": [ { key: "leftArrow" } ],
+            "uiRight": [ { key: "rightArrow" } ],
+            "uiUp": [ { key: "upArrow" } ],
+            "uiDown": [ { key: "downArrow" } ],
+        };
+    }
+
     // Static pressed state pool
     private static readonly mPressedStatePoolKeys: Map<InputActionKeyName, PressedState> = new Map();
 

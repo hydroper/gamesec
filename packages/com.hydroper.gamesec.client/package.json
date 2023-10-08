@@ -8,7 +8,7 @@
     "assert": "^2.1.0",
     "com.hydroper.gamesec.core": "file:../com.hydroper.gamesec.core",
     "com.hydroper.gamesec.ui": "file:../com.hydroper.gamesec.ui",
+    "focus-lock": "^0.11.6",
     "two.js": "^0.8.11"
-  },
-  "devDependencies": {}
+  }
 }

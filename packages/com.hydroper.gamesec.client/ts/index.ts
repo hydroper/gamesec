@@ -6,3 +6,5 @@ export * from "./Input";
 
 import { InputActionAtom, InputActionKey, InputActionKeyName } from "./InputAction";
 export { InputActionAtom, InputActionKey, InputActionKeyName };
+
+export * from "./Ticker";
