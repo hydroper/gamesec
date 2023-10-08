@@ -32,3 +32,4 @@ Controls:
 - [ ] Modal
   - [ ] Dialog
 - [ ] Card
+- [ ] StageContainer

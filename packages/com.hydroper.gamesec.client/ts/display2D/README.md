@@ -8,3 +8,7 @@ Tasks:
 
 - [ ] Apply filters
 - [ ] Display object mask
+- [ ] Display object paths
+  - `.first`
+  - `.last`
+  - `..`
