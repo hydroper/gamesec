@@ -1,8 +1,8 @@
 import { CSSValue, Padding, RectangleSkin, Transition } from "../skins";
 
 export type ThemeControls = {
-    button: ThemeButton,
-    label: ThemeLabel,
+    button?: ThemeButton,
+    label?: ThemeLabel,
 };
 
 export type ThemeButton = {
@@ -31,6 +31,11 @@ export type ThemeLabel = ThemeLabelState & {
      * A CSS font family.
      */
     font?: string,
+
+    italic?: boolean,
+    bold?: boolean,
+    light?: boolean,
+    extraLight?: boolean,
 
     selectable?: boolean,
     selected?: ThemeLabelState,

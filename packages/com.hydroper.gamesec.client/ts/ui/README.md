@@ -21,3 +21,6 @@ Controls:
 - [ ] Scrollable
   - Track (the progress bar)
   - Thumb (the draggable scrolling handle)
+- [ ] Modal
+  - [ ] Dialog
+- [ ] Card
