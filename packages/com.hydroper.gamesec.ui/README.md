@@ -3,7 +3,6 @@
 ## To do
 
 - [ ] Events, such as `onHover`, `onFocus`, `onPressed`
-- [ ] Text color
 - [ ] Transitions
 - [ ] Animations
 - [ ] Dark mode

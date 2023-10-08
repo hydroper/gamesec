@@ -20,6 +20,9 @@ export type ThemeButtonState = RectangleSkin & {
 };
 
 export type ThemeLabel = ThemeLabelState & {
+    textAlign?: "left" | "center" | "right",
+
+    selectable?: boolean,
     selected?: ThemeLabelState,
 };
 
