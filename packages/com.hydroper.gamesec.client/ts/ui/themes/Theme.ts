@@ -16,7 +16,7 @@ export class Theme {
      * Constructs a theme.
      * 
      * Constructing a theme will add an anonymous stylesheet to the document
-     * that uses `.themeClass-theme-` as a prefix for all selectors.
+     * that uses `.themeClass-t-` as a prefix for all selectors.
      *
      * @param themeClass The theme's CSS class.
      */
@@ -29,7 +29,7 @@ export class Theme {
         this.defaultFont = options.defaultFont;
 
         // Set stylesheet class prefix
-        this.mPrefix = `.${this.themeClass}-theme-`;
+        this.mPrefix = `.${this.themeClass}-t-`;
 
         // Add a stylesheet to the document
         this.mStyle = document.createElement("style");
