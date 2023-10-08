@@ -4,4 +4,5 @@
 
 - [ ] Text color
 - [ ] Transitions
+- [ ] Animations
 - [ ] Dark mode
