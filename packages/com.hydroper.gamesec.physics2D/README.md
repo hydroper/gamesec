@@ -15,11 +15,11 @@ const simulation = new gamesec.Simulation({
 // Create a rigid body
 const body = simulation.addRigidBody({
     type: "dynamic",
-    shape: {
+    shapes: [{
         type: "rectangle",
         width: 100,
         height: 100,
-    },
+    }],
 });
 
 body.id; // Body's ID

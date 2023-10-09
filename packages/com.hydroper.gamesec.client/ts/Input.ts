@@ -50,7 +50,9 @@ export default class Input {
     static readonly onMapUpdate = new EventEmitter<void>();
 
     // Static input map
-    private static mMap: Record<string, InputActionAtom[]> = {};
+    private static mMap: Record<string, InputActionAtom[]> = {
+        ...Input.defaultUIMap(),
+    };
 
     /**
      * Returns the actual input map in read-only mode.

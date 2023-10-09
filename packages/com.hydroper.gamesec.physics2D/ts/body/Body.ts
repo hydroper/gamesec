@@ -26,9 +26,9 @@ export type BodyJSON = {
     angularDamping?: number,
 
     /**
-     * The body's shape.
+     * The body's shapes.
      */
-    shape: Shape,
+    shapes: Shape[],
 
     /**
      * The body's restitution. Defaults to zero.
@@ -130,9 +130,9 @@ export default class Body {
     angularDamping: number;
 
     /**
-     * The body's shape.
+     * The body's shapes.
      */
-    readonly shape: Shape;
+    private readonly mShapes: Shape[];
 
     /**
      * The body's restitution. Defaults to zero.
@@ -188,7 +188,7 @@ export default class Body {
         this._type = json.fixed ? "fixed" : "dynamic";
         this.linearDamping = json.linearDamping === undefined ? 0 : json.linearDamping;
         this.angularDamping = json.angularDamping === undefined ? 0 : json.angularDamping;
-        this.shape = json.shape;
+        this.mShapes = json.shapes;
         this.restitution = json.restitution === undefined ? 0 : json.restitution;
         this.friction = json.friction === undefined ? 0 : json.friction;
         this.inertia = json.inertia === undefined ? 0 : json.inertia;

@@ -1,21 +1,26 @@
 import { Vector } from "com.hydroper.gamesec.core";
 
 export type ShapeJSON =
-    // Rectangle turns into a polygon
-    | {
-        type: "rectangle",
-        width: number,
-        height: number,
-    }
-    // Circle
-    | {
-        type: "circle",
-        radius: number,
-    }
-    // Polygon
-    | {
-        type: "polygon",
-        vertices: Vector[],
+    (
+        // Rectangle turns into a polygon
+        | {
+            type: "rectangle",
+            width: number,
+            height: number,
+        }
+        // Circle
+        | {
+            type: "circle",
+            radius: number,
+        }
+        // Polygon
+        | {
+            type: "polygon",
+            vertices: Vector[],
+        }
+    )
+    & {
+        position?: Vector,
     };
 
 /**
@@ -31,7 +36,10 @@ export default class Shape {
     // Define radius for circle
     private _radius: number = 0;
 
+    readonly position: Vector;
+
     constructor(json: ShapeJSON) {
+        this.position = json.position ?? new Vector(0, 0);
         switch (json.type) {
             case "rectangle":
                 this._isCircle = false;
