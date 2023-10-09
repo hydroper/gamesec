@@ -1,3 +1,5 @@
+import { FocusNeighbor } from "../FocusNeighbor";
+
 /**
  * Abstract class for user interface controls.
  */
@@ -7,10 +9,21 @@ export default abstract class Control {
      */
     id: string | undefined;
 
+    /**
+     * Indicates neighbors to focus.
+     */
+    readonly focusNeighbor: FocusNeighbor = {};
+
     private mParent: Control | undefined = undefined;
     private readonly mChildren: Control[] = [];
 
     constructor(public readonly nativeElement: HTMLElement) {}
+
+    /**
+     * Indicates whether the control is focusable.
+     */
+    abstract get focusable(): boolean;
+    abstract set focusable(value);
 
     get parent() {
         return this.mParent;
