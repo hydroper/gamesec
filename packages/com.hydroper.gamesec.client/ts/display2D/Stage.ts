@@ -6,29 +6,27 @@ import DisplayObject from "./DisplayObject";
 import Image from "./Image";
 
 /**
- * Stage's scale mode.
+ * Stage's fit mode.
  * 
  * - `"none"` indicates no scaling of the stage is done.
- * - `"optimalFit"` indicates that the stage is scaled to fit the screen
+ * - `"optimal"` indicates that the stage is scaled to fit the screen
  *   using an optimal scale ratio.
+ * - `"all"` indicates that the stage takes all space available in the screen,
+ *   without additional scaling.
  */
-export type ScaleMode = "none" | "optimalFit";
+export type Fit = "none" | "optimal" | "all";
 
 export type StageOptions = {
     /**
      * Scale mode:
      *
      * - `"none"` indicates no scaling of the stage is done.
-     * - `"optimalFit"` indicates that the stage is scaled to fit the screen
+     * - `"optimal"` indicates that the stage is scaled to fit the screen
      *   using an optimal scale ratio.
+     * - `"all"` indicates that the stage takes all space available in the screen,
+     *   without additional scaling.
      */
-    scaleMode: ScaleMode,
-
-    /**
-     * Scale base to which the stage should fit to according to
-     * the `scaleMode` option.
-     */
-    scaleBase: Window | HTMLCanvasElement,
+    fit: Fit,
 
     /**
      * Initial stage size.
@@ -40,7 +38,7 @@ export type StageOptions = {
      * it is an element selector.
      * Mutually exclusive with the `canvas` option.
      */
-    container?: string | HTMLCanvasElement,
+    container?: string | HTMLElement,
 
     /**
      * The stage canvas. If it is a string, it is an element selector.
@@ -62,8 +60,7 @@ export default class Stage {
 
     private mInvalidated = false;
     private mDidInitialRender = false;
-    private mScaleMode: ScaleMode;
-    private mScaleBase: Window | HTMLCanvasElement;
+    private mFit: Fit;
     private mSize: Vector;
     private mResizeListener: (e: UIEvent) => void;
     private mCanvas: HTMLCanvasElement;
@@ -73,8 +70,7 @@ export default class Stage {
     private mLastResizeScale: number = 0;
 
     constructor(options: StageOptions) {
-        this.mScaleMode = options.scaleMode;
-        this.mScaleBase = options.scaleBase;
+        this.mFit = options.fit;
         this.mSize = options.size;
 
         // Resolves the canvas that this stage will use
@@ -146,13 +142,20 @@ export default class Stage {
         });
     }
 
-    private getScaleBaseSize(): Vector {
-        if (this.mScaleBase instanceof HTMLElement) {
-            const boundingClientRect = this.mScaleBase.getBoundingClientRect();
+    private getScreenSize(): Vector {
+        /*
+        if (this.mFitTo instanceof HTMLElement) {
+            const boundingClientRect = this.mFitTo.getBoundingClientRect();
             return new Vector(boundingClientRect.width, boundingClientRect.height);
         } else {
-            return new Vector(this.mScaleBase.innerWidth, this.mScaleBase.innerHeight);
+            return new Vector(this.mFitTo.innerWidth, this.mFitTo.innerHeight);
         }
+        */
+        if (this.mCanvas.parentElement === null) {
+            return new Vector(0, 0);
+        }
+        const boundingClientRect = this.mCanvas.parentElement.getBoundingClientRect();
+        return new Vector(boundingClientRect.width, boundingClientRect.height);
     }
 
     private resizeRenderer(renderer: underlying.Renderer) {
@@ -175,14 +178,14 @@ export default class Stage {
             return;
         }
 
-        switch (this.mScaleMode) {
+        switch (this.mFit) {
             case "none": {
                 this.mLastResizeSize = new Vector(this.mSize.x, this.mSize.y);
                 this.mLastResizeScale = 1;
                 break;
             }
-            case "optimalFit": {
-                const screenSize = this.getScaleBaseSize();
+            case "optimal": {
+                const screenSize = this.getScreenSize();
 
                 // Take the optimal scale ratio
                 const ratios = screenSize.divide(this.mSize);
@@ -190,6 +193,13 @@ export default class Stage {
 
                 this.mLastResizeSize = new Vector(this.mSize.x * optimalRatio, this.mSize.y * optimalRatio);
                 this.mLastResizeScale = optimalRatio;
+                break;
+            }
+            case "all": {
+                const screenSize = this.getScreenSize();
+                this.mSize = screenSize;
+                this.mLastResizeSize = screenSize;
+                this.mLastResizeScale = 1;
                 break;
             }
         }

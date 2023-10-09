@@ -1,5 +1,7 @@
 # Getting started
 
+The following demonstrates manually creating a 2D stage. Creating a 2D stage in actual user interface is done by using the `gamesec.ui.Stage` control instead of `gamesec.Stage`.
+
 ```ts
 import * as gamesec from "com.hydroper.gamesec.client";
 
@@ -10,11 +12,7 @@ import * as gamesec from "com.hydroper.gamesec.client";
 const stage = new gamesec.Stage({
     // Fit the stage to the screen using an
     // optimal scale ratio.
-    scaleMode: "optimalFit",
-
-    // Scale base for `scaleMode` on which to fit the stage.
-    // Either the `window` or a HTML element.
-    scaleBase: window,
+    fit: "optimal",
 
     // The stage's initial size
     size: new gamesec.Vector(800, 600),

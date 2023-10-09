@@ -1,5 +1,5 @@
-import Stage, { StageOptions, ScaleMode } from "./Stage";
-export { Stage, StageOptions, ScaleMode };
+import Stage, { StageOptions, Fit } from "./Stage";
+export { Stage, StageOptions, Fit };
 
 import DisplayObject from "./DisplayObject";
 export { DisplayObject };
