@@ -26,6 +26,19 @@ export default abstract class Control {
     abstract get focusable(): boolean;
     abstract set focusable(value);
 
+    /**
+     * Focus a focusable control.
+     */
+    focus(options: {
+        preventScroll?: boolean,
+    } = {}) {
+        if (this.focusable) {
+            this.nativeElement.focus({
+                preventScroll: options.preventScroll,
+            });
+        }
+    }
+
     get parent() {
         return this.mParent;
     }
