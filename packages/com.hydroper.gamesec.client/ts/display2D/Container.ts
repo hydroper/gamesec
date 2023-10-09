@@ -1,11 +1,16 @@
-import DisplayObject, { displayObjectConstructorToken } from "./DisplayObject";
+import DisplayObject from "./DisplayObject";
 
 export default class Container extends DisplayObject {
-    private readonly mChildren: DisplayObject[] = [];
-
     constructor() {
-        super(displayObjectConstructorToken);
+        super();
     }
+
+    /**
+     * *Internal property.*
+     *
+     * @hidden
+     */
+    readonly mChildren: DisplayObject[] = [];
 
     get isEmpty(): boolean {
         return this.childCount == 0;

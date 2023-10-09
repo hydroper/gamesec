@@ -1,6 +1,9 @@
 import { ControlPath } from "./ControlPath";
 
-export type FocusNeighbor = {
+/**
+ * Indicates focus neighbors for a control.
+ */
+export type FocusNeighbors = {
     /**
      * Path to a left neighbor.
      */

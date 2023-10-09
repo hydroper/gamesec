@@ -1,5 +1,5 @@
 export * from "./controls";
 export * as skins from "./skins";
 export * from "./themes";
-export { FocusNeighbor } from "./FocusNeighbor";
+export { FocusNeighbors } from "./FocusNeighbors";
 export { ControlPath } from "./ControlPath";

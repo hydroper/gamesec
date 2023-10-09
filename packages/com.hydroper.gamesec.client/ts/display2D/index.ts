@@ -4,6 +4,8 @@ export { Stage, StageOptions, ScaleMode };
 import DisplayObject from "./DisplayObject";
 export { DisplayObject };
 
+export { DisplayPath } from "./DisplayPath";
+
 import Container from "./Container";
 export { Container };
 

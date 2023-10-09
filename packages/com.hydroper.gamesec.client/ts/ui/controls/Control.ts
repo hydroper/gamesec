@@ -1,7 +1,8 @@
-import { FocusNeighbor } from "../FocusNeighbor";
+import { ControlPath } from "../ControlPath";
+import { FocusNeighbors } from "../FocusNeighbors";
 
 /**
- * Abstract class for user interface controls.
+ * An user interface control.
  */
 export default abstract class Control {
     /**
@@ -12,7 +13,7 @@ export default abstract class Control {
     /**
      * Indicates neighbors to focus.
      */
-    readonly focusNeighbor: FocusNeighbor = {};
+    readonly focusNeighbors: FocusNeighbors = {};
 
     private mParent: Control | undefined = undefined;
     private readonly mChildren: Control[] = [];
@@ -28,15 +29,6 @@ export default abstract class Control {
     get parent() {
         return this.mParent;
     }
-
-    get isEmpty(): boolean {
-        return this.childCount == 0;
-    }
-
-    get nonEmpty(): Boolean {
-        return this.childCount != 0;
-    }
-
     get children(): IterableIterator<Control> {
         return this.mChildren[Symbol.iterator]();
     }
@@ -128,5 +120,35 @@ export default abstract class Control {
         childB.remove();
         this.addChildAt(childAIndex, childB);
         this.addChildAt(childBIndex, childA);
+    }
+
+    /**
+     * Resolves a control path.
+     */
+    resolve(path: ControlPath): Control | undefined {
+        let r: Control | undefined = this;
+        for (const portion of path.split("/")) {
+            if (r === undefined) {
+                break;
+            }
+            switch (portion) {
+                case "..":
+                    r = r.parent;
+                    break;
+                case ".first":
+                    r = r.getChildAt(0);
+                    break;
+                case ".last":
+                    r = r.childCount == 0 ? undefined : r.getChildAt(r.childCount - 1);
+                    break;
+                case "":
+                case ".":
+                    break;
+                default:
+                    r = r.mChildren.find(child => child.id == portion);
+                    break;
+            }
+        }
+        return r;
     }
 }

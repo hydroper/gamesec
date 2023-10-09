@@ -1,26 +1,21 @@
 import assert from "assert";
 import { Vector, degreesToRadians, radiansToDegrees } from "com.hydroper.gamesec.core";
-import type Container from "./Container";
-
-/**
- * @hidden
- */
-export const displayObjectConstructorToken = Symbol();
+import Container from "./Container";
+import { DisplayPath } from "./DisplayPath";
 
 /**
  * A 2D display object.
  */
 export default abstract class DisplayObject {
-    constructor(token: Symbol) {
-        assert(token === displayObjectConstructorToken, "DisplayObject must not be constructed directly");
-    }
-
     /**
-     * Custom data attached to this display object.
+     * Arbitrary data attached to this display object by the
+     * developer.
      */
-    customData: any = undefined;
+    metaData: any = undefined;
 
     /**
+     * *Internal property.*
+     *
      * @hidden
      */
     mParent: Container | undefined = undefined;
@@ -62,7 +57,8 @@ export default abstract class DisplayObject {
     scale: Vector = new Vector(1, 1);
 
     /**
-     * Opacity ratio of the display object.
+     * Opacity ratio of the display object. It ranges from
+     * 0 to 1 (inclusive).
      */
     opacity: number = 1;
 
@@ -72,14 +68,57 @@ export default abstract class DisplayObject {
     visible: boolean = true;
 
     /**
-     * Name of the display object, used by display object paths.
+     * ID of the display object, used by display paths. It is used
+     * in the `resolve()` method, for instance.
      */
-    name: string | undefined = undefined;
+    id: string | undefined = undefined;
 
     /**
      * Removes the display object itself from its parent.
      */
     remove() {
         this.mParent?.removeChild(this);
+    }
+
+    /**
+     * Resolves a display path.
+     */
+    resolve(path: DisplayPath): DisplayObject | undefined {
+        let r: DisplayObject | undefined = this;
+        for (const portion of path.split("/")) {
+            if (r === undefined) {
+                break;
+            }
+            switch (portion) {
+                case "..":
+                    r = r.parent;
+                    break;
+                case ".first":
+                    if (r instanceof Container) {
+                        r = r.getChildAt(0);
+                    } else {
+                        r = undefined;
+                    }
+                    break;
+                case ".last":
+                    if (r instanceof Container) {
+                        r = r.isEmpty ? undefined : r.getChildAt(r.childCount - 1);
+                    } else {
+                        r = undefined;
+                    }
+                    break;
+                case "":
+                case ".":
+                    break;
+                default:
+                    if (r instanceof Container) {
+                        r = r.mChildren.find(child => child.id == portion);
+                    } else {
+                        r = undefined;
+                    }
+                    break;
+            }
+        }
+        return r;
     }
 }
