@@ -1,3 +1,4 @@
+import Stage from "./Stage";
 import { ControlPath } from "../ControlPath";
 import { FocusNeighbors } from "../FocusNeighbors";
 
@@ -96,8 +97,7 @@ export default abstract class Control {
         const i = this.mChildren.indexOf(child);
         if (i !== -1) {
             this.mChildren.splice(i, 1);
-            child.mParent = undefined;
-            child.nativeElement.remove();
+            this.finishRemovedChild(child);
             return true;
         }
         return false;
@@ -105,7 +105,7 @@ export default abstract class Control {
 
     removeChildAt(index: number): boolean {
         if (index >= 0 && index < this.childCount) {
-            this.mChildren[index]!.nativeElement.remove();
+            this.finishRemovedChild(this.mChildren[index]);
             this.mChildren.splice(index, 1);
             return true;
         }
@@ -114,10 +114,18 @@ export default abstract class Control {
 
     removeAllChildren() {
         for (const child of this.mChildren) {
-            child.mParent = undefined;
-            child.nativeElement.remove();
+            this.finishRemovedChild(child);
         }
         this.mChildren.length = 0;
+    }
+
+    private finishRemovedChild(child: Control) {
+        // A stage must be properly detached from the document.
+        if (child instanceof Stage) {
+            child.stage.detachFromDocument();
+        }
+        child.nativeElement.remove();
+        child.mParent = undefined;
     }
 
     /**
