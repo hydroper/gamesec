@@ -16,5 +16,8 @@ export { HeadingTitle };
 import Subtitle from "./controls/Subtitle";
 export { Subtitle };
 
+import Paragraph from "./controls/Paragraph";
+export { Paragraph };
+
 import StageContainer from "./controls/StageContainer";
 export { StageContainer };

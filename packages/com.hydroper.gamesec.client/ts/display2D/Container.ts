@@ -66,6 +66,14 @@ export default class Container extends DisplayObject {
         }
     }
 
+    /**
+     * Adds children to the container in a chain.
+     */
+    ["with"](children: DisplayObject[]): this {
+        this.addChildren(children);
+        return this;
+    }
+
     removeChild(child: DisplayObject): boolean {
         const i = this.mChildren.indexOf(child);
         if (i !== -1) {

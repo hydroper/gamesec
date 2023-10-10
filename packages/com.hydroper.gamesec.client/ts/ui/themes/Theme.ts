@@ -68,6 +68,7 @@ export class Theme {
         this.buildLabel();
         this.buildHeadingTitle();
         this.buildSubtitle();
+        this.buildParagraph();
 
         return this.mStyleBuilder.build();
     }
@@ -135,6 +136,18 @@ export class Theme {
         const builder = this.mStyleBuilder;
 
         builder.push(`${prefix}subtitle {` + builder.buildSubtitle(this.controls.subtitle ?? {}) + "}");
+    }
+
+    private buildParagraph() {
+        const prefix = this.mPrefix;
+        const builder = this.mStyleBuilder;
+
+        const selectedStyle = builder.buildParagraphState(this.controls.paragraph?.selected ?? {}, false);
+
+        builder.push(`${prefix}paragraph {` + builder.buildParagraph(this.controls.paragraph ?? {}) + "}");
+        builder.push(`${prefix}paragraph::selection {` + selectedStyle + "}");
+        builder.push(`${prefix}paragraph::-moz-selection {` + selectedStyle + "}");
+        builder.push(`${prefix}paragraph::-webkit-selection {` + selectedStyle + "}");
     }
 }
 

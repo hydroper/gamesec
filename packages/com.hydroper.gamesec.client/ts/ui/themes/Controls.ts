@@ -10,6 +10,7 @@ export type Controls = {
     label?: Label,
     headingTitle?: HeadingTitle,
     subtitle?: Subtitle,
+    paragraph?: Paragraph,
 };
 
 export type Application = FontSkin & {
@@ -53,6 +54,15 @@ export type HeadingTitleTitle = FontSkin & {
 
 export type Subtitle = FontSkin & {
     margin?: Margin,
+};
+
+export type Paragraph = ParagraphState & {
+    margin?: Margin,
+};
+
+export type ParagraphState = FontSkin & {
+    selectable?: boolean,
+    selected?: LabelState,
 };
 
 export type FontSkin = {

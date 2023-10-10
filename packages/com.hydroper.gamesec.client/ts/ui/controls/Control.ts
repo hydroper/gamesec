@@ -197,6 +197,14 @@ export default abstract class Control {
     }
 
     /**
+     * Adds children to the control in a chain.
+     */
+    ["with"](children: Control[]): this {
+        this.addChildren(children);
+        return this;
+    }
+
+    /**
      * Removes the control itself from the parent.
      */
     remove() {

@@ -1,23 +1,22 @@
-import assert from "assert";
 import Control from "./Control";
 
 /**
- * Displays a subtitle.
+ * Displays a paragraph, possibly selectable.
  */
-export default class Subtitle extends Control {
+export default class Paragraph extends Control {
     // Theme class
-    protected themeClass = "subtitle";
+    protected readonly themeClass = "paragraph";
 
     // Focusable
     readonly focusable = false;
 
     constructor(text: string = "") {
-        super(document.createElement("span"));
+        super(document.createElement("p"));
         this.text = text;
     }
 
     /**
-     * The text contained by this subtitle.
+     * The text contained by this paragraph.
      */
     get text(): string {
         return this.nativeElement.innerText;
