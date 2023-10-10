@@ -123,6 +123,8 @@ export default class StylesheetBuilder {
         return (
             this.resets() +
             "user-select: none;" +
+            "width: 100%;" +
+            "height: 100%;" +
             this.buildFont(skin, true) +
             (skin.background !== undefined ? `background: ${skin.background ?? "#fff"};` : "")
         );

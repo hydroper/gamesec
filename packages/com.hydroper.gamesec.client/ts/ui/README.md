@@ -12,7 +12,9 @@
 
 Controls:
 
-- [ ] `themeOverrides` for each Control subtype (uses the `style` property of the native element)
+- [ ] Theme overrides for each Control subtype (uses the `style` property of the native element)
+  - `setThemeOverrides()`
+  - `clearThemeOverrides()`
 - [x] Control paths
   - `.last` indicates last child
   - `.first` indicates first child
@@ -25,8 +27,9 @@ Controls:
     - [x] Resolve path
     - [x] Handle focus neighbors
     - [x] Children, similiar to `Container` display objects. In addition, adding and removing a single child modifies the underlying DOM. Removing all children also modifies the underlying DOM.
-- [ ] Application (uses `prefix-application` class)
+- [x] Application
 - [x] Button
+- [ ] Label
 - [ ] Scrollable
   - Track (the progress bar)
   - Thumb (the draggable scrolling handle)
