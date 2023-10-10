@@ -2,13 +2,9 @@
 
 ## To do
 
-- [ ] Fonts
-- [ ] Events, such as `onHover`, `onFocus`, `onPressed`
-- [ ] Transitions
+- [ ] Fonts (in `ui/themes/Theme.ts`)
 - [ ] Animations
-- [ ] Dark mode
-  - `defaultLightTheme`
-  - `defaultDarkTheme`
+- [ ] `ScreenResponsive`, for handling screen-responsive user interfaces
 
 Controls:
 
@@ -29,7 +25,8 @@ Controls:
     - [x] Children, similiar to `Container` display objects. In addition, adding and removing a single child modifies the underlying DOM. Removing all children also modifies the underlying DOM.
 - [x] Application
 - [x] Button
-- [ ] Label
+- [x] Label
+  - [x] `text`
 - [ ] Scrollable
   - Track (the progress bar)
   - Thumb (the draggable scrolling handle)

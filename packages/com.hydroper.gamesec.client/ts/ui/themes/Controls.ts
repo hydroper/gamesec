@@ -30,11 +30,6 @@ export type ButtonState = RectangleSkin & FontSkin;
 export type Label = LabelState & {
     align?: "left" | "center" | "right",
 
-    italic?: boolean,
-    bold?: boolean,
-    light?: boolean,
-    extraLight?: boolean,
-
     selectable?: boolean,
     selected?: LabelState,
 };
@@ -51,4 +46,11 @@ export type FontSkin = {
 
     fontColor?: CSSValue,
     fontSize?: Points,
+
+    italicFont?: boolean,
+    boldFont?: boolean,
+    lightFont?: boolean,
+
+    upperCase?: boolean,
+    lowerCase?: boolean,
 };

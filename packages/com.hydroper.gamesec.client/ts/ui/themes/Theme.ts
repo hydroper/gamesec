@@ -102,6 +102,18 @@ export class Theme {
         buildLevel("secondary", this.controls.button?.primary ?? {});
         buildLevel("danger", this.controls.button?.danger ?? {});
     }
+
+    buildLabelSylesheet() {
+        const prefix = this.mPrefix;
+        const builder = this.mStyleBuilder;
+
+        const selectedStyle = builder.buildLabelState(this.controls.label?.selected ?? {}, false);
+
+        builder.push(`${prefix}label {` + builder.buildLabel(this.controls.label ?? {}) + "}");
+        builder.push(`${prefix}label::selection {` + selectedStyle + "}");
+        builder.push(`${prefix}label::-moz-selection {` + selectedStyle + "}");
+        builder.push(`${prefix}label::-webkit-selection {` + selectedStyle + "}");
+    }
 }
 
 export type ThemeOptions = {

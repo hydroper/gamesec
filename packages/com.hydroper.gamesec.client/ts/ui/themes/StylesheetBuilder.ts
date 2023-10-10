@@ -1,6 +1,6 @@
 import { Vector } from "com.hydroper.gamesec.core";
 import { Margin, MarginOrPadding, Padding, RectangleSkin, RectangleStroke, RectangleStroke4, Transition, TransitionProperty } from "../skins";
-import { Application, Button, ButtonState, FontSkin } from "./Controls";
+import { Application, Button, ButtonState, FontSkin, Label, LabelState } from "./Controls";
 import pointsInCSS from "../skins/pointsInCSS";
 import { Stroke } from "../skins/Stroke";
 
@@ -41,7 +41,14 @@ export default class StylesheetBuilder {
             (skin.fontColor !== undefined ? `color: ${skin.fontColor};` : "") +
             (emitDefaultFont ? `font-family: ${skin.font ?? this.defaultFont};` : "") +
             (!emitDefaultFont && skin.font !== undefined ? `font-family: ${skin.font};` : "") +
-            (skin.fontSize !== undefined ? `font-size: ${skin.fontSize};` : "")
+            (skin.fontSize !== undefined ? `font-size: ${skin.fontSize};` : "") +
+
+            (skin.italicFont !== undefined ? `font-style: italic;` : "") +
+            (skin.boldFont ? "font-weight: bold;" :
+            skin.lightFont ? "font-weight: lighter;" : "") +
+
+            (skin.upperCase ? "text-transform: uppercase;" :
+            skin.lowerCase ? "text-transform: lowercase;" : "")
         );
     }
 
@@ -146,6 +153,22 @@ export default class StylesheetBuilder {
         return (
             this.buildRectangle(skin) +
             this.buildFont(skin, false)
+        );
+    }
+
+    buildLabel(skin: Label) {
+        return (
+            this.resets() +
+            `text-align: ${skin.align};` +
+            `user-select: ${skin.selectable ? "auto" : "none"};` +
+            this.buildLabelState(skin, true)
+        );
+    }
+
+    buildLabelState(skin: LabelState, emitDefaultFont: boolean) {
+        return (
+            this.buildFont(skin, emitDefaultFont) +
+            (skin.background !== undefined ? `background: ${skin.background};` : "")
         );
     }
 }
