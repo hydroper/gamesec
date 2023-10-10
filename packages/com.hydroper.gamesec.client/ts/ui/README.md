@@ -25,6 +25,9 @@ Controls:
     - [x] Children, similiar to `Container` display objects. In addition, adding and removing a single child modifies the underlying DOM. Removing all children also modifies the underlying DOM.
 - [x] Application
 - [x] Button
+  - [ ] `isToggle`
+    - [ ] `isPressed`
+- [ ] `CheckboxButton`
 - [x] Label
   - [x] `text`
 - [ ] Scrollable
