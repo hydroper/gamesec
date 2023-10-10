@@ -12,6 +12,7 @@
 
 Controls:
 
+- [ ] `themeOverrides` for each Control subtype (uses the `style` property of the native element)
 - [x] Control paths
   - `.last` indicates last child
   - `.first` indicates first child
@@ -27,7 +28,7 @@ Controls:
 - [ ] Application (uses `prefix-application` class)
 - [ ] Button
   - [ ] Text (direct inner text)
-  - [ ] Level (`primary = trueOrFalse`, `secondary = trueOrFalse`, `warning = trueOrFalse`; mutually-exclusive properties)
+  - [ ] Level (`primary = trueOrFalse`, `secondary = trueOrFalse`, `danger = trueOrFalse`; mutually-exclusive properties)
 - [ ] Scrollable
   - Track (the progress bar)
   - Thumb (the draggable scrolling handle)

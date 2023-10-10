@@ -1,5 +1,5 @@
 import { CSSValue } from "./CSSValue";
-import { Point } from "./Point";
+import { Point } from "./Points";
 
 export type Stroke = {
     color?: CSSValue,

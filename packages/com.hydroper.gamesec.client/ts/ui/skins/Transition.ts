@@ -1,9 +1,12 @@
 import { CSSValue } from "./CSSValue";
 
+export type TransitionProperty = "background" | "stroke"
+    | "fontColor" | "fontSize"
+    | "margin" | "marginLeft" | "marginRight" | "marginTop" | "marginBottom"
+    | "padding" | "paddingLeft" | "paddingRight" | "paddingTop" | "paddingBottom";
+
 export type Transition = {
-    property: "fill" | "stroke" | "textColor"
-        | "margin" | "marginLeft" | "marginRight" | "marginTop" | "marginBottom"
-        | "padding" | "paddingLeft" | "paddingRight" | "paddingTop" | "paddingBottom",
+    property: TransitionProperty,
 
     /**
      * [CSS easing function.](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function)

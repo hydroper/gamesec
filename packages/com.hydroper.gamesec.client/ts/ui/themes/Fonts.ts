@@ -1,4 +1,4 @@
-export type ThemeFonts = ThemeFont[];
+export type Fonts = ThemeFont[];
 
 /**
  * Specifies a font for a theme.

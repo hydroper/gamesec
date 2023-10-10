@@ -1,8 +1,9 @@
-import { Point } from "./Point";
+import { Points } from "./Points";
+import { Vector } from "com.hydroper.gamesec.core";
 
-export type Padding = Point | {
-    left?: Point,
-    right?: Point,
-    top?: Point,
-    bottom?: Point,
+export type Padding = Points | Vector | {
+    left?: Points,
+    right?: Points,
+    top?: Points,
+    bottom?: Points,
 };

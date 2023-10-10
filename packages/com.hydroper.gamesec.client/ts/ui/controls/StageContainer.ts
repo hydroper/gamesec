@@ -50,7 +50,11 @@ export default class StageContainer extends Control {
      */
     readonly stage: Stage;
 
+    // Focusable
     readonly focusable: boolean = false;
+
+    // CSS class
+    protected readonly themeClass = "stage-container";
 
     constructor(options: StageContainerOptions) {
         super(document.createElement("canvas"));

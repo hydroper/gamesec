@@ -2,6 +2,6 @@ import { CSSValue } from "./CSSValue";
 import { RectangleStroke } from "./RectangleStroke";
 
 export type RectangleSkin = {
-    fill?: CSSValue,
+    background?: CSSValue,
     stroke?: RectangleStroke,
 };

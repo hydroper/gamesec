@@ -1,15 +1,17 @@
-import { ThemeControls } from "./ThemeControls";
-import { ThemeFonts } from "./ThemeFonts";
+import { Button, ButtonState, Controls, FontSkin } from "./Controls";
+import { Fonts } from "./Fonts";
+import StylesheetBuilder from "./StylesheetBuilder";
 
 /**
  * An user interface theme.
  */
 export class Theme {
     private mStyle: HTMLStyleElement;
+    private mStyleBuilder: StylesheetBuilder;
     private mPrefix: string;
 
-    readonly controls: ThemeControls;
-    readonly fonts: ThemeFonts;
+    readonly controls: Controls;
+    readonly fonts: Fonts;
     readonly defaultFont: string;
 
     /**
@@ -26,15 +28,27 @@ export class Theme {
     ) {
         this.controls = options.controls;
         this.fonts = options.fonts;
-        this.defaultFont = options.defaultFont;
+        this.defaultFont = options.defaultFont ?? "serif";
 
         // Set stylesheet class prefix
         this.mPrefix = `.${this.themeClass}-t-`;
+
+        // Create the builder
+        this.mStyleBuilder = new StylesheetBuilder({
+            defaultFont: this.defaultFont,
+        });
 
         // Add a stylesheet to the document
         this.mStyle = document.createElement("style");
         this.mStyle.innerText = this.buildStylesheet();
         document.head.appendChild(this.mStyle);
+    }
+
+    /**
+     * Returns the CSS selector prefix, starting with a dot (`.`).
+     */
+    get prefix() {
+        return this.mPrefix;
     }
 
     /**
@@ -47,41 +61,57 @@ export class Theme {
 
     private buildStylesheet() {
         const prefix = this.mPrefix;
-        const builder: string[] = [];
+        const builder = this.mStyleBuilder;
 
-        // prefix-reset
         builder.push(
-            `${prefix}-reset {` +
-                "margin: 0;" +
-                "padding: 0;" +
-                "border: 0;" +
-            "}"
-        );
-
-        // prefix-application
-        builder.push(
-            `${prefix}-application {` +
-                "user-select: none;" +
-                `font-family: ${this.defaultFont};` +
+            `${prefix}application {` +
+                (this.controls.application !== undefined ? builder.buildApplication(this.controls.application) : "") +
             "}"
         );
 
         // prefix-button
-        toDo();
+        builder.push(this.buildButtonStylesheet());
 
         // prefix-label
         toDo();
 
-        return builder.join("");
+        return this.mStyleBuilder.build();
+    }
+
+    private buildButtonStylesheet() {
+        const prefix = this.mPrefix;
+        const builder = this.mStyleBuilder;
+
+        const buildLevel = (level: string, skin: Button) => {
+            const buildState = (state: ButtonState) => {
+                return (
+                    `background: ${state.background ?? "rgba(0, 0, 0, 0)"};` +
+                );
+            };
+            builder.push(
+                `${prefix}button-${level} {` +
+                    this.resets() +
+                    this.buildFont(skin, true) +
+                    "user-select: none;" +
+                    `font-family: ${skin?.font ?? this.defaultFont};` +
+                    this.buildTransitions(skin.transitions) +
+                    buildState(skin?.normal ?? {}) +
+                "}"
+            );
+        };
+
+        buildLevel("primary", this.controls.button?.primary ?? {});
+        buildLevel("secondary", this.controls.button?.primary ?? {});
+        buildLevel("danger", this.controls.button?.danger ?? {});
     }
 }
 
 export type ThemeOptions = {
-    controls: ThemeControls,
-    fonts: ThemeFonts,
+    controls: Controls,
+    fonts: Fonts,
 
     /**
      * Default CSS font family.
      */
-    defaultFont: string,
+    defaultFont?: string,
 };

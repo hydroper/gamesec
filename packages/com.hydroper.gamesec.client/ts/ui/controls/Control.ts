@@ -2,11 +2,68 @@ import StageContainer from "./StageContainer";
 import { ControlPath } from "../ControlPath";
 import { FocusNeighbors } from "../FocusNeighbors";
 import { EventEmitter } from "com.hydroper.gamesec.core";
+import { Theme } from "../themes";
+import assert from "assert";
 
 /**
  * An user interface control.
  */
 export default abstract class Control {
+    // Theme properties
+    private mTheme: Theme | undefined = undefined;
+    private mAppliedTheme: Theme | undefined = undefined;
+
+    /**
+     * The theme assigned to this control. Assigning a theme
+     * reference will apply its skins immediately and future
+     * added children are affected.
+     */
+    get theme() {
+        return this.mTheme;
+    }
+    set theme(reference) {
+        this.mTheme = reference;
+        this.applyTheme();
+    }
+
+    /**
+     * @hidden
+     */
+    protected abstract get themeClass(): string;
+
+    /**
+     * Applies the assigned or inherited theme to the control and its children
+     * so that the stylesheets are up-to-date with the theme.
+     */
+    private applyTheme() {
+        // Inherit theme
+        let inherited: Control = this;
+        let inheritedTheme: Theme | undefined = undefined;
+        while (Infinity) {
+            inheritedTheme = inherited.mTheme;
+            if (inheritedTheme !== undefined) {
+                break;
+            }
+            assert(inherited.parent !== undefined, "Could not inherit theme as no theme is set.");
+            inherited = inherited.parent!;
+        }
+
+        this.mAppliedTheme = inheritedTheme!;
+
+        const single = (control: Control) => {
+            this.applySingleTheme(control);
+            for (const child of control.children) {
+                single(child);
+            }
+        };
+
+        single(this);
+    }
+
+    private applySingleTheme(control: Control) {
+        control.nativeElement.className = `${this.mAppliedTheme!.prefix.slice(1)}${this.themeClass}`;
+    }
+
     private static readonly mFromNativeElement = new WeakMap<HTMLElement, Control>();
 
     /**
@@ -172,6 +229,9 @@ export default abstract class Control {
             child.stage.attachToDocument();
         }
         child.mParent = parent;
+        if (this.mAppliedTheme !== undefined) {
+            this.applySingleTheme(child);
+        }
     }
 
     private finishRemovedChild(child: Control) {
