@@ -32,6 +32,8 @@ Controls:
 - [x] HeadingTitle
 - [x] Subtitle
 - [x] Paragraph
+- [ ] Row
+- [ ] Column
 - [ ] Scrollable
   - Track (the progress bar)
   - Thumb (the draggable scrolling handle)
