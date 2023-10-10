@@ -40,6 +40,16 @@ import assert from "assert";
  *     const shouldMoveRight = Input.isPressed("moveRight");
  * });
  * ```
+ * 
+ * # Built-in actions
+ * 
+ * The following actions are pre-defined in every map
+ * and can be overriden:
+ * 
+ * * `uiLeft` — Used for focusing the left neighbor of a UI control.
+ * * `uiRight` — Used for focusing the right neighbor of a UI control.
+ * * `uiUp` — Used for focusing the top neighbor of a UI control.
+ * * `uiDown` — Used for focusing the bottom neighbor of a UI control.
  */
 export default class Input {
     /**
@@ -50,7 +60,7 @@ export default class Input {
 
     // Static input map
     private static mMap: Record<string, InputActionAtom[]> = {
-        ...Input.defaultUIMap(),
+        ...Input.builtin(),
     };
 
     /**
@@ -65,22 +75,16 @@ export default class Input {
      */
     static setMap(map: Record<string, InputActionAtom[]>) {
         // Update static map
-        Input.mMap = clonePlainObject(map, true);
+        Input.mMap = {
+            ...Input.builtin(),
+            ...clonePlainObject(map, true),
+        };
 
         // Emit update event
         this.onMapUpdate.emit(undefined);
     }
 
-    /**
-     * Returns an input map containing user interface actions, in read-only mode.
-     * The map will contain the following actions:
-     * 
-     * * `uiLeft` — Used for focusing the left neighbor of a control.
-     * * `uiRight` — Used for focusing the right neighbor of a control.
-     * * `uiUp` — Used for focusing the top neighbor of a control.
-     * * `uiDown` — Used for focusing the bottom neighbor of a control.
-     */
-    static defaultUIMap(): Record<string, InputActionAtom[]> {
+    private static builtin(): Record<string, InputActionAtom[]> {
         return {
             "uiLeft": [ { key: "leftArrow" } ],
             "uiRight": [ { key: "rightArrow" } ],

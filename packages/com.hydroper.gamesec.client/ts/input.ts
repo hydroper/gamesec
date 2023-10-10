@@ -1,4 +1,5 @@
-export * from "./input/Input";
+import Input from "./input/Input";
+export { Input };
 export {
     InputActionAtom,
     InputActionKey,

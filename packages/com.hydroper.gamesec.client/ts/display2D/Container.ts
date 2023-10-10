@@ -43,7 +43,6 @@ export default class Container extends DisplayObject {
         }
         if (child.mParent !== undefined) {
             child.remove();
-            child.mParent = undefined;
         }
         child.mParent = this;
         this.mChildren.push(child);
@@ -59,6 +58,12 @@ export default class Container extends DisplayObject {
         }
         child.mParent = this;
         this.mChildren.splice(index, 0, child);
+    }
+
+    addChildren(children: DisplayObject[]) {
+        for (const child of children) {
+            this.addChild(child);
+        }
     }
 
     removeChild(child: DisplayObject): boolean {

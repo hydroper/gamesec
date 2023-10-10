@@ -7,6 +7,16 @@ import { EventEmitter } from "com.hydroper.gamesec.core";
  * An user interface control.
  */
 export default abstract class Control {
+    private static readonly mFromNativeElement = new WeakMap<HTMLElement, Control>();
+
+    /**
+     * Finds an existing control already constructed earlier
+     * given its native element reference.
+     */
+    static fromNativeElement(element: HTMLElement): Control | undefined {
+        return Control.mFromNativeElement.get(element);
+    }
+
     /**
      * ID for this control, used in control paths.
      */
@@ -17,8 +27,10 @@ export default abstract class Control {
      */
     readonly focusNeighbors: FocusNeighbors = {};
 
+    // Parent reference
     private mParent: Control | undefined = undefined;
 
+    // Children controls
     private readonly mChildren: Control[] = [];
 
     /**
@@ -37,6 +49,9 @@ export default abstract class Control {
     readonly onFocusOut = new EventEmitter<void>();
 
     constructor(public readonly nativeElement: HTMLElement) {
+        // Native element to the Control itself
+        Control.mFromNativeElement.set(nativeElement, this);
+
         this.nativeElement.addEventListener("focus", e => {
             this.onFocus.emit(undefined);
         });
@@ -95,9 +110,9 @@ export default abstract class Control {
             child.remove();
             child.mParent = undefined;
         }
-        child.mParent = this;
         this.mChildren.push(child);
         this.nativeElement.appendChild(child.nativeElement);
+        this.finishAddedChild(child, this);
     }
 
     addChildAt(index: number, child: Control) {
@@ -106,11 +121,16 @@ export default abstract class Control {
         }
         if (child.mParent !== undefined) {
             child.remove();
-            child.mParent = undefined;
         }
-        child.mParent = this;
         this.mChildren.splice(index, 0, child);
         this.nativeElement.insertBefore(child.nativeElement, this.nativeElement.children[index]);
+        this.finishAddedChild(child, this);
+    }
+
+    addChildren(children: Control[]) {
+        for (const child of children) {
+            this.addChild(child);
+        }
     }
 
     /**
@@ -144,6 +164,14 @@ export default abstract class Control {
             this.finishRemovedChild(child);
         }
         this.mChildren.length = 0;
+    }
+
+    private finishAddedChild(child: Control, parent: Control) {
+        // A stage must be properly attached to the document.
+        if (child instanceof StageContainer) {
+            child.stage.attachToDocument();
+        }
+        child.mParent = parent;
     }
 
     private finishRemovedChild(child: Control) {

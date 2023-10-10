@@ -103,9 +103,8 @@ export default class Stage {
         // Resize
         this.resize();
 
-        // Listen to resize events
+        // Set resize listener
         this.mResizeListener = e => { this.resize.bind(this) };
-        window.addEventListener("resize", this.mResizeListener);
     }
 
     /**
@@ -206,11 +205,27 @@ export default class Stage {
     }
 
     /**
+     * Attaches the stage itself to the document
+     * by by adding its event listeners,
+     * and turning the stage valid.
+     */
+    attachToDocument() {
+        if (!this.mInvalidated) {
+            return;
+        }
+        this.mInvalidated = false;
+        window.addEventListener("resize", this.mResizeListener);
+    }
+
+    /**
      * Detaches the stage itself from the document
      * by removing its canvas element and its event listeners,
      * and invalidating the stage.
      */
     detachFromDocument() {
+        if (this.mInvalidated) {
+            return;
+        }
         this.mInvalidated = true;
         this.mCanvas.remove();
         window.removeEventListener("resize", this.mResizeListener);
