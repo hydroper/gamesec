@@ -8,6 +8,17 @@ const constructorKey = Symbol("constructorKey");
  * The top control of the user interface hierarchy. This control
  * must not be constructed as its single instance is available
  * in the `gamesec.ui.application` property.
+ * 
+ * # Default theme
+ * 
+ * GameSec initially sets the application theme as follows:
+ * 
+ * ```
+ * import { ui } from "com.hydroper.gamesec.client";
+ *
+ * // Theme based on Microsoft's Metro design
+ * ui.application.theme = ui.metroTheme;
+ * ```
  */
 export default class Application extends Control {
     // Theme class
@@ -33,6 +44,6 @@ export default class Application extends Control {
 }
 
 /**
- * The GameSec user interface application.
+ * The GameSec user interface's application.
  */
 export const application = new Application(constructorKey);
