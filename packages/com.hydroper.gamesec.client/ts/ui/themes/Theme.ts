@@ -70,10 +70,10 @@ export class Theme {
         );
 
         // prefix-button
-        builder.push(this.buildButtonStylesheet());
+        this.buildButtonStylesheet();
 
         // prefix-label
-        toDo();
+        this.buildLabelSylesheet();
 
         return this.mStyleBuilder.build();
     }
@@ -83,21 +83,19 @@ export class Theme {
         const builder = this.mStyleBuilder;
 
         const buildLevel = (level: string, skin: Button) => {
-            const buildState = (state: ButtonState) => {
-                return (
-                    `background: ${state.background ?? "rgba(0, 0, 0, 0)"};` +
-                );
-            };
-            builder.push(
-                `${prefix}button-${level} {` +
-                    this.resets() +
-                    this.buildFont(skin, true) +
-                    "user-select: none;" +
-                    `font-family: ${skin?.font ?? this.defaultFont};` +
-                    this.buildTransitions(skin.transitions) +
-                    buildState(skin?.normal ?? {}) +
-                "}"
-            );
+            builder.push(`${prefix}button-${level} {` + builder.buildButton(skin) + "}");
+            if (skin.hovered !== undefined) {
+                builder.push(`${prefix}button-${level}:hover {` + builder.buildButton(skin.hovered) + "}");
+            }
+            if (skin.disabled !== undefined) {
+                builder.push(`${prefix}button-${level}:disabled {` + builder.buildButton(skin.disabled) + "}");
+            }
+            if (skin.pressed !== undefined) {
+                builder.push(`${prefix}button-${level}:active {` + builder.buildButton(skin.pressed) + "}");
+            }
+            if (skin.focused !== undefined) {
+                builder.push(`${prefix}button-${level}:focus {` + builder.buildButton(skin.focused) + "}");
+            }
         };
 
         buildLevel("primary", this.controls.button?.primary ?? {});

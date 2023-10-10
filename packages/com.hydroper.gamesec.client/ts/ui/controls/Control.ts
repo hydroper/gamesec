@@ -60,7 +60,10 @@ export default abstract class Control {
         single(this);
     }
 
-    private applySingleTheme(control: Control) {
+    /**
+     * @hidden
+     */
+    protected applySingleTheme(control: Control) {
         control.nativeElement.className = `${this.mAppliedTheme!.prefix.slice(1)}${this.themeClass}`;
     }
 

@@ -29,6 +29,7 @@ Controls:
 - [ ] Button
   - [ ] Text (direct inner text)
   - [ ] Level (`primary = trueOrFalse`, `secondary = trueOrFalse`, `danger = trueOrFalse`; mutually-exclusive properties)
+    - [ ] Mutating the level should apply the theme (via `button.applySingleTheme(button)`)
 - [ ] Scrollable
   - Track (the progress bar)
   - Thumb (the draggable scrolling handle)

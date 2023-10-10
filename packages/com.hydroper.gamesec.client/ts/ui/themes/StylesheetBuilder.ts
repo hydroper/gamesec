@@ -1,5 +1,8 @@
-import { Transition, TransitionProperty } from "../skins";
+import { Vector } from "com.hydroper.gamesec.core";
+import { Margin, MarginOrPadding, Padding, RectangleSkin, RectangleStroke, RectangleStroke4, Transition, TransitionProperty } from "../skins";
 import { Application, Button, ButtonState, FontSkin } from "./Controls";
+import pointsInCSS from "../skins/pointsInCSS";
+import { Stroke } from "../skins/Stroke";
 
 /**
  * @hidden
@@ -52,27 +55,86 @@ export default class StylesheetBuilder {
                 `transition-property: ${prop};` +
                 `transition-duration: ${tr.duration};` +
                 (tr.easing !== undefined ? `transition-timing-function: ${tr.easing};` : "") +
-                (tr.delay !== undefined ? `transition-delay: ${tr.delay}` : "")
+                (tr.delay !== undefined ? `transition-delay: ${tr.delay};` : "")
             );
         };
         return `transition: ${transitions.map(single)};`;
+    }
+
+    buildPaddingOrMargin(property: string, mp: MarginOrPadding | undefined) {
+        if (mp === undefined) {
+            return "";
+        }
+        if (mp instanceof Vector) {
+            return `${property}: ${pointsInCSS(mp.y)} ${pointsInCSS(mp.x)};`;
+        }
+        if (typeof mp == "number") {
+            return `${property}: ${pointsInCSS(mp)};`;
+        }
+        return (
+            (mp.left !== undefined ? `${property}-left: ${pointsInCSS(mp.left)}` : "") +
+            (mp.right !== undefined ? `${property}-right: ${pointsInCSS(mp.right)}` : "") +
+            (mp.top !== undefined ? `${property}-top: ${pointsInCSS(mp.top)}` : "") +
+            (mp.bottom !== undefined ? `${property}-bottom: ${pointsInCSS(mp.bottom)}` : "")
+        );
+    }
+
+    buildPadding(padding: Padding | undefined) {
+        return this.buildPaddingOrMargin("padding", padding);
+    }
+
+    buildMargin(margin: Margin | undefined) {
+        return this.buildPaddingOrMargin("margin", margin);
+    }
+
+    buildRectangle(skin: RectangleSkin) {
+        return (
+            (skin.background === undefined ? `background: ${skin.background};` : "") +
+            this.buildRectangleStroke(skin.stroke)
+        );
+    }
+
+    buildRectangleStroke(stroke: RectangleStroke | undefined) {
+        if (stroke === undefined) {
+            return "";
+        }
+        if (stroke.hasOwnProperty("size")) {
+            const strokeA = stroke as Stroke;
+            return (
+                `border: ${pointsInCSS(strokeA.size)} ${strokeA.style} ${strokeA.color};` +
+                (strokeA.radius !== undefined ? `border-radius: ${pointsInCSS(strokeA.radius)};` : "")
+            );
+        }
+        const strokeA = stroke as RectangleStroke4;
+        return (
+            (strokeA.left !== undefined ? `border-left: ${pointsInCSS(strokeA.left.size)} ${strokeA.left.style} ${strokeA.left.color};` : "") +
+            (strokeA.right !== undefined ? `border-right: ${pointsInCSS(strokeA.right.size)} ${strokeA.right.style} ${strokeA.right.color};` : "") +
+            (strokeA.top !== undefined ? `border-top: ${pointsInCSS(strokeA.top.size)} ${strokeA.top.style} ${strokeA.top.color};` : "") +
+            (strokeA.bottom !== undefined ? `border-bottom: ${pointsInCSS(strokeA.bottom.size)} ${strokeA.bottom.style} ${strokeA.bottom.color};` : "") +
+
+            (strokeA.topLeftRadius !== undefined ? `border-top-left-radius: ${pointsInCSS(strokeA.topLeftRadius)};` : "") +
+            (strokeA.topRightRadius !== undefined ? `border-top-right-radius: ${pointsInCSS(strokeA.topRightRadius)};` : "") +
+            (strokeA.bottomLeftRadius !== undefined ? `border-bottom-left-radius: ${pointsInCSS(strokeA.bottomLeftRadius)};` : "") +
+            (strokeA.bottomRightRadius !== undefined ? `border-bottom-right-radius: ${pointsInCSS(strokeA.bottomRightRadius)};` : "")
+        );
     }
 
     buildApplication(skin: Application) {
         return (
             this.resets() +
             "user-select: none;" +
-            `font-family: ${this.defaultFont};` +
-            this.buildFont(skin, false) +
-            `background: ${skin.background ?? "#fff"};`
+            this.buildFont(skin, true) +
+            (skin.background !== undefined ? `background: ${skin.background ?? "#fff"};` : "")
         );
     }
 
     buildButton(skin: Button) {
         return (
             this.resets() +
-            this.buildFont(skin, true) +
             "user-select: none;" +
+            this.buildFont(skin, true) +
+            this.buildPadding(skin.padding) +
+            this.buildMargin(skin.margin) +
             this.buildTransitions(skin.transitions) +
             this.buildButtonState(skin?.normal ?? {})
         );

@@ -1,9 +1,5 @@
 import { Vector } from "com.hydroper.gamesec.core";
 import { Points } from "./Points";
+import { MarginOrPadding } from "./MarginOrPadding";
 
-export type Margin = Points | Vector | {
-    left?: Points,
-    right?: Points,
-    top?: Points,
-    bottom?: Points,
-};
+export type Margin = MarginOrPadding;
