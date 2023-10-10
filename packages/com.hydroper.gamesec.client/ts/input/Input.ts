@@ -1,5 +1,5 @@
 import { EventEmitter, clonePlainObject } from "com.hydroper.gamesec.core";
-import { InputActionAtom, InputActionKey, InputActionKeyName, navigatorKeyToActualKeyName } from "./InputAction";
+import { InputActionAtom, InputActionKey, InputActionKeyName, navigatorKeyToThis } from "./InputAction";
 import assert from "assert";
 
 /**
@@ -109,7 +109,7 @@ export default class Input {
 
     static {
         window.addEventListener("keydown", evt => {
-            const keyName = navigatorKeyToActualKeyName(evt.key);
+            const keyName = navigatorKeyToThis(evt.key);
             if (keyName !== undefined) {
                 // Mutate pressed state
                 let state = Input.mPressedStatePoolKeys.get(keyName);
@@ -133,7 +133,7 @@ export default class Input {
         });
 
         window.addEventListener("keyup", evt => {
-            const keyName = navigatorKeyToActualKeyName(evt.key);
+            const keyName = navigatorKeyToThis(evt.key);
             if (keyName !== undefined) {
                 // Mutate pressed state
                 let state = Input.mPressedStatePoolKeys.get(keyName);

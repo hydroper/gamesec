@@ -64,7 +64,10 @@ export default abstract class Control {
      * @hidden
      */
     protected applySingleTheme(control: Control) {
-        control.nativeElement.className = `${this.mAppliedTheme!.prefix.slice(1)}${this.themeClass}`;
+        if (this.mAppliedTheme === undefined) {
+            return;
+        }
+        control.nativeElement.className = `${this.mAppliedTheme.prefix.slice(1)}${this.themeClass}`;
     }
 
     private static readonly mFromNativeElement = new WeakMap<HTMLElement, Control>();

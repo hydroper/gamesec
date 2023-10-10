@@ -26,10 +26,7 @@ Controls:
     - [x] Handle focus neighbors
     - [x] Children, similiar to `Container` display objects. In addition, adding and removing a single child modifies the underlying DOM. Removing all children also modifies the underlying DOM.
 - [ ] Application (uses `prefix-application` class)
-- [ ] Button
-  - [ ] Text (direct inner text)
-  - [ ] Level (`primary = trueOrFalse`, `secondary = trueOrFalse`, `danger = trueOrFalse`; mutually-exclusive properties)
-    - [ ] Mutating the level should apply the theme (via `button.applySingleTheme(button)`)
+- [x] Button
 - [ ] Scrollable
   - Track (the progress bar)
   - Thumb (the draggable scrolling handle)

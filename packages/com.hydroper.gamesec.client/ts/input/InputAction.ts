@@ -42,7 +42,7 @@ export type InputActionKeyName =
     | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m"
     | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
 
-const navigatorKeyToActualKeyNames = new Map<string, InputActionKeyName>([
+const navigatorKeyToThiss = new Map<string, InputActionKeyName>([
     ["arrowleft", "leftArrow"],
     ["arrowright", "rightArrow"],
     ["arrowup", "upArrow"],
@@ -55,10 +55,10 @@ const navigatorKeyToActualKeyNames = new Map<string, InputActionKeyName>([
     ["tab", "tab"],
 ]);
 
-export function navigatorKeyToActualKeyName(name: string): InputActionKeyName | undefined {
+export function navigatorKeyToThis(name: string): InputActionKeyName | undefined {
     name = name.toLowerCase();
     if (/a-z0-9|f\d\d?/.test(name)) {
         return name as any;
     }
-    return navigatorKeyToActualKeyNames.get(name);
+    return navigatorKeyToThiss.get(name);
 }
