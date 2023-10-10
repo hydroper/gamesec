@@ -8,23 +8,17 @@ import Image from "./Image";
 /**
  * Stage's fit mode.
  * 
- * - `"none"` indicates no scaling of the stage is done.
- * - `"optimal"` indicates that the stage is scaled to fit the screen
+ * - `none` indicates no scaling of the stage is done.
+ * - `optimal` indicates that the stage is scaled to fit the screen
  *   using an optimal scale ratio.
- * - `"all"` indicates that the stage takes all space available in the screen,
+ * - `all` indicates that the stage takes all space available in the screen,
  *   without additional scaling.
  */
 export type Fit = "none" | "optimal" | "all";
 
 export type StageOptions = {
     /**
-     * Scale mode:
-     *
-     * - `"none"` indicates no scaling of the stage is done.
-     * - `"optimal"` indicates that the stage is scaled to fit the screen
-     *   using an optimal scale ratio.
-     * - `"all"` indicates that the stage takes all space available in the screen,
-     *   without additional scaling.
+     * Fit mode. `none`, `optimal` or `all`.
      */
     fit: Fit,
 

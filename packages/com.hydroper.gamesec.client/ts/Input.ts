@@ -37,7 +37,6 @@ import assert from "assert";
  * 
  * // When any input is pressed
  * Input.onInputPressed.listen(() => {
- *     // Should move right?
  *     const shouldMoveRight = Input.isPressed("moveRight");
  * });
  * ```

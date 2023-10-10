@@ -6,10 +6,10 @@ type StageOptions = {
     /**
      * Stage's fit mode:
      *
-     * - `"none"` indicates that no scaling of the stage is done.
-     * - `"optimal"` indicates that the stage is scaled to fit the screen
+     * - `none` indicates that no scaling of the stage is done.
+     * - `optimal` indicates that the stage is scaled to fit the screen
      *   using an optimal scale ratio.
-     * - `"all"` indicates that the stage takes all space available in the screen,
+     * - `all` indicates that the stage takes all space available in the screen,
      *   without additional scaling.
      */
     fit: Fit,
