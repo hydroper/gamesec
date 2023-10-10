@@ -18,9 +18,9 @@ export class Theme {
      * Constructs a theme.
      * 
      * Constructing a theme will add an anonymous stylesheet to the document
-     * that uses `.themeClass-t-` as a prefix for all selectors.
+     * that uses `.themeClass-t-` as a prefix for all classes.
      *
-     * @param themeClass The theme's CSS class.
+     * @param themeClass The CSS class prefix of the theme to construct.
      */
     constructor(
         public readonly themeClass: string,
@@ -108,7 +108,7 @@ export class Theme {
         buildLevel("danger", this.controls.button?.danger ?? {});
     }
 
-    buildLabel() {
+    private buildLabel() {
         const prefix = this.mPrefix;
         const builder = this.mStyleBuilder;
 
@@ -120,7 +120,7 @@ export class Theme {
         builder.push(`${prefix}label::-webkit-selection {` + selectedStyle + "}");
     }
 
-    buildHeadingTitle() {
+    private buildHeadingTitle() {
         const prefix = this.mPrefix;
         const builder = this.mStyleBuilder;
 
@@ -130,7 +130,7 @@ export class Theme {
         builder.push(`${prefix}heading-title-4 {` + builder.buildHeadingTitle(this.controls.headingTitle?.heading4 ?? {}) + "}");
     }
 
-    buildSubtitle() {
+    private buildSubtitle() {
         const prefix = this.mPrefix;
         const builder = this.mStyleBuilder;
 
