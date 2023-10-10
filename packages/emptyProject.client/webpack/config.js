@@ -9,7 +9,7 @@ module.exports = {
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: [".ts", ".tsx", ".js"],
-        // Add support for TypeScripts fully qualified ESM imports.
+        // Add support for TypeScript's fully qualified ESM imports.
         extensionAlias: {
             ".js": [".js", ".ts"],
             ".cjs": [".cjs", ".cts"],

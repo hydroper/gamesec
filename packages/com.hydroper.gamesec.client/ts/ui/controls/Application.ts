@@ -32,7 +32,7 @@ export default class Application extends Control {
         assert(doNotConstruct === constructorKey, "The 'Application' control must not be constructed; use 'gamesec.ui.application' instead");
 
         // Modify the document's <body/> element
-        document.body.appendChild(this.nativeElement);
+        document.body.prepend(this.nativeElement);
         document.body.style.margin = "0";
         document.body.style.padding = "0";
         document.body.style.width = "100%";
