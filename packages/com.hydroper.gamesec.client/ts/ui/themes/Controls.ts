@@ -58,11 +58,12 @@ export type Subtitle = FontSkin & {
 
 export type Paragraph = ParagraphState & {
     margin?: Margin,
+    selectable?: boolean,
+    selected?: ParagraphState,
 };
 
 export type ParagraphState = FontSkin & {
-    selectable?: boolean,
-    selected?: LabelState,
+    background?: CSSValue,
 };
 
 export type FontSkin = {
