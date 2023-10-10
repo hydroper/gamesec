@@ -1,6 +1,7 @@
-import Stage from "./Stage";
+import StageContainer from "./StageContainer";
 import { ControlPath } from "../ControlPath";
 import { FocusNeighbors } from "../FocusNeighbors";
+import { EventEmitter } from "com.hydroper.gamesec.core";
 
 /**
  * An user interface control.
@@ -17,9 +18,35 @@ export default abstract class Control {
     readonly focusNeighbors: FocusNeighbors = {};
 
     private mParent: Control | undefined = undefined;
+
     private readonly mChildren: Control[] = [];
 
-    constructor(public readonly nativeElement: HTMLElement) {}
+    /**
+     * Focus event.
+     */
+    readonly onFocus = new EventEmitter<void>();
+
+    /**
+     * Focus in event.
+     */
+    readonly onFocusIn = new EventEmitter<void>();
+
+    /**
+     * Focus out event.
+     */
+    readonly onFocusOut = new EventEmitter<void>();
+
+    constructor(public readonly nativeElement: HTMLElement) {
+        this.nativeElement.addEventListener("focus", e => {
+            this.onFocus.emit(undefined);
+        });
+        this.nativeElement.addEventListener("focusin", e => {
+            this.onFocusIn.emit(undefined);
+        });
+        this.nativeElement.addEventListener("focusout", e => {
+            this.onFocusOut.emit(undefined);
+        });
+    }
 
     /**
      * Indicates whether the control is focusable.
@@ -121,7 +148,7 @@ export default abstract class Control {
 
     private finishRemovedChild(child: Control) {
         // A stage must be properly detached from the document.
-        if (child instanceof Stage) {
+        if (child instanceof StageContainer) {
             child.stage.detachFromDocument();
         }
         child.nativeElement.remove();

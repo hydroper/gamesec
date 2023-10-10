@@ -1,8 +1,8 @@
 import { Vector } from "com.hydroper.gamesec.core";
-import { Container, Fit, Stage as StageStage } from "../../display2D";
+import { Container, Fit, Stage } from "../../display2D";
 import Control from "./Control";
 
-type StageOptions = {
+type StageContainerOptions = {
     /**
      * Stage's fit mode:
      *
@@ -33,28 +33,28 @@ type StageOptions = {
  * ```
  * import * as gamesec from "com.hydroper.gamesec.client";
  * 
- * // Create a stage
- * const stage = new gamesec.ui.Stage({
+ * // Create a stage container
+ * const container = new gamesec.ui.StageContainer({
  *     fit: "optimal",
  *     size: new gamesec.Vector(700, 570),
  *     background: "#000",
  * });
  * 
- * // Stage's stage
+ * // Container's stage
  * stage.stage;
  * ```
  */
-export default class Stage extends Control {
+export default class StageContainer extends Control {
     /**
-     * Stage's stage.
+     * Container's stage.
      */
-    readonly stage: StageStage;
+    readonly stage: Stage;
 
     readonly focusable: boolean = false;
 
-    constructor(options: StageOptions) {
+    constructor(options: StageContainerOptions) {
         super(document.createElement("canvas"));
-        this.stage = new StageStage({
+        this.stage = new Stage({
             fit: options.fit,
             size: options.size,
             background: options.background,

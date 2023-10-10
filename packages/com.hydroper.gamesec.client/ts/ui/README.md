@@ -9,11 +9,10 @@
 - [ ] Dark mode
   - `defaultLightTheme`
   - `defaultDarkTheme`
-- [ ] Theme creates a CSS `style` at the end of the `<head>`. The theme classes use the `theme-class-` prefix.
 
 Controls:
 
-- [ ] Control paths
+- [x] Control paths
   - `.last` indicates last child
   - `.first` indicates first child
   - `..` indicates ascending child
@@ -36,4 +35,4 @@ Controls:
 - [ ] Modal
   - [ ] Dialog
 - [ ] Card
-- [x] Stage
+- [x] StageContainer

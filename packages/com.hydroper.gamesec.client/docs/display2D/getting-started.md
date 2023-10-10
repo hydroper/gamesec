@@ -1,6 +1,6 @@
 # Getting started
 
-The following demonstrates manually creating a 2D stage. Creating a 2D stage in actual user interface is done by using the `gamesec.ui.Stage` control instead of `gamesec.Stage`.
+The following demonstrates manually creating a 2D stage. Creating a 2D stage in actual user interface is done by using `gamesec.ui.StageContainer` instead of `gamesec.Stage`.
 
 ```ts
 import * as gamesec from "com.hydroper.gamesec.client";
@@ -66,11 +66,4 @@ const container = new gamesec.Container([displayObject1, displayObjectN]);
 // Add or remove child display objects dynamically
 container.addChild(displayObject);
 container.removeChild(displayObject);
-```
-
-## Detaching from document
-
-```ts
-// Invalidates the stage and detaches it from the document.
-stage.detachFromDocument();
 ```
