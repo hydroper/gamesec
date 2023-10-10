@@ -1,6 +1,6 @@
 import { Vector } from "com.hydroper.gamesec.core";
 import { Margin, MarginOrPadding, Padding, RectangleSkin, RectangleStroke, RectangleStroke4, Transition, TransitionProperty } from "../skins";
-import { Application, Button, ButtonState, FontSkin, Label, LabelState } from "./Controls";
+import { Application, Button, ButtonState, FontSkin, HeadingTitle, HeadingTitleTitle, Label, LabelState, Subtitle } from "./Controls";
 import pointsInCSS from "../skins/pointsInCSS";
 import { Stroke } from "../skins/Stroke";
 
@@ -169,6 +169,24 @@ export default class StylesheetBuilder {
         return (
             this.buildFont(skin, emitDefaultFont) +
             (skin.background !== undefined ? `background: ${skin.background};` : "")
+        );
+    }
+
+    buildHeadingTitle(skin: HeadingTitleTitle) {
+        return (
+            this.resets() +
+            `user-select: none;` +
+            this.buildFont(skin, true) +
+            this.buildMargin(skin.margin)
+        );
+    }
+
+    buildSubtitle(skin: Subtitle) {
+        return (
+            this.resets() +
+            `user-select: none;` +
+            this.buildFont(skin, true) +
+            this.buildMargin(skin.margin)
         );
     }
 }

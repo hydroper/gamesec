@@ -10,7 +10,7 @@ const constructorKey = Symbol("constructorKey");
  */
 export default class Application extends Control {
     // Theme class
-    readonly themeClass = "application";
+    protected readonly themeClass = "application";
 
     // Focusable
     readonly focusable = false;
@@ -19,6 +19,10 @@ export default class Application extends Control {
         super(document.createElement("div"));
         assert(doNotConstruct === constructorKey, "The 'Application' control must not be constructed; use 'gamesec.ui.application' instead");
         document.body.appendChild(this.nativeElement);
+        document.body.style.margin = "0";
+        document.body.style.padding = "0";
+        document.body.style.width = "100%";
+        document.body.style.height = "100%";
     }
 }
 

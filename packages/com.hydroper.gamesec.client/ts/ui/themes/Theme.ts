@@ -63,22 +63,27 @@ export class Theme {
         const prefix = this.mPrefix;
         const builder = this.mStyleBuilder;
 
+        this.buildApplication();
+        this.buildButton();
+        this.buildLabel();
+        this.buildHeadingTitle();
+        this.buildSubtitle();
+
+        return this.mStyleBuilder.build();
+    }
+
+    private buildApplication() {
+        const prefix = this.mPrefix;
+        const builder = this.mStyleBuilder;
+
         builder.push(
             `${prefix}application {` +
                 (this.controls.application !== undefined ? builder.buildApplication(this.controls.application) : "") +
             "}"
         );
-
-        // prefix-button
-        this.buildButtonStylesheet();
-
-        // prefix-label
-        this.buildLabelSylesheet();
-
-        return this.mStyleBuilder.build();
     }
 
-    private buildButtonStylesheet() {
+    private buildButton() {
         const prefix = this.mPrefix;
         const builder = this.mStyleBuilder;
 
@@ -103,7 +108,7 @@ export class Theme {
         buildLevel("danger", this.controls.button?.danger ?? {});
     }
 
-    buildLabelSylesheet() {
+    buildLabel() {
         const prefix = this.mPrefix;
         const builder = this.mStyleBuilder;
 
@@ -113,6 +118,23 @@ export class Theme {
         builder.push(`${prefix}label::selection {` + selectedStyle + "}");
         builder.push(`${prefix}label::-moz-selection {` + selectedStyle + "}");
         builder.push(`${prefix}label::-webkit-selection {` + selectedStyle + "}");
+    }
+
+    buildHeadingTitle() {
+        const prefix = this.mPrefix;
+        const builder = this.mStyleBuilder;
+
+        builder.push(`${prefix}heading-title-1 {` + builder.buildHeadingTitle(this.controls.headingTitle?.heading1 ?? {}) + "}");
+        builder.push(`${prefix}heading-title-2 {` + builder.buildHeadingTitle(this.controls.headingTitle?.heading2 ?? {}) + "}");
+        builder.push(`${prefix}heading-title-3 {` + builder.buildHeadingTitle(this.controls.headingTitle?.heading3 ?? {}) + "}");
+        builder.push(`${prefix}heading-title-4 {` + builder.buildHeadingTitle(this.controls.headingTitle?.heading4 ?? {}) + "}");
+    }
+
+    buildSubtitle() {
+        const prefix = this.mPrefix;
+        const builder = this.mStyleBuilder;
+
+        builder.push(`${prefix}subtitle {` + builder.buildSubtitle(this.controls.subtitle ?? {}) + "}");
     }
 }
 

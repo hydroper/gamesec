@@ -29,7 +29,8 @@ Controls:
     - [ ] `isPressed`
 - [ ] `CheckboxButton`
 - [x] Label
-  - [x] `text`
+- [x] HeadingTitle
+- [x] Subtitle
 - [ ] Scrollable
   - Track (the progress bar)
   - Thumb (the draggable scrolling handle)

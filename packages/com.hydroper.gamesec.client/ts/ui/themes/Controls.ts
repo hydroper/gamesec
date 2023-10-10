@@ -8,6 +8,8 @@ export type Controls = {
         danger?: Button,
     },
     label?: Label,
+    headingTitle?: HeadingTitle,
+    subtitle?: Subtitle,
 };
 
 export type Application = FontSkin & {
@@ -36,6 +38,21 @@ export type Label = LabelState & {
 
 export type LabelState = FontSkin & {
     background?: CSSValue,
+};
+
+export type HeadingTitle = {
+    heading1?: HeadingTitleTitle,
+    heading2?: HeadingTitleTitle,
+    heading3?: HeadingTitleTitle,
+    heading4?: HeadingTitleTitle,
+};
+
+export type HeadingTitleTitle = FontSkin & {
+    margin?: Margin,
+};
+
+export type Subtitle = FontSkin & {
+    margin?: Margin,
 };
 
 export type FontSkin = {

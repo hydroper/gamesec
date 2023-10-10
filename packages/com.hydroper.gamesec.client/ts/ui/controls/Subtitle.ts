@@ -1,11 +1,12 @@
+import assert from "assert";
 import Control from "./Control";
 
 /**
- * Displays text, possibly selectable.
+ * Displays a subtitle.
  */
-export default class Label extends Control {
+export default class Subtitle extends Control {
     // Theme class
-    protected readonly themeClass = "label";
+    protected themeClass = "subtitle";
 
     // Focusable
     readonly focusable = false;
@@ -16,7 +17,7 @@ export default class Label extends Control {
     }
 
     /**
-     * The text contained by this label.
+     * The text contained by this title.
      */
     get text(): string {
         return this.nativeElement.innerText;
