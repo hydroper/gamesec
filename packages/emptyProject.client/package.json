@@ -1,0 +1,19 @@
+{
+  "name": "emptyProject.client",
+  "version": "0.1.0",
+  "scripts": {
+    "debug": "npx webpack serve -c webpack/development.config.js",
+    "development-build": "npx webpack -c webpack/development.config.js",
+    "production-build": "npx webpack -c webpack/production.config.js"
+  },
+  "main": "ts/index.ts",
+  "dependencies": {
+    "com.hydroper.gamesec.client": "file:../com.hydroper.gamesec.client"
+  },
+  "devDependencies": {
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

@@ -17,7 +17,7 @@ const constructorKey = Symbol("constructorKey");
  * import { ui } from "com.hydroper.gamesec.client";
  *
  * // Theme based on Microsoft's Metro design
- * ui.application.theme = ui.metroTheme;
+ * ui.application.theme = ui.themes.metroTheme;
  * ```
  */
 export default class Application extends Control {
