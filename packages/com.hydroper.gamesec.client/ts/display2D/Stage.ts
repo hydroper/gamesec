@@ -52,7 +52,7 @@ export type StageOptions = {
 export default class Stage {
     public readonly root = new Container();
 
-    private mInvalidated = false;
+    private mInvalidated = true;
     private mDidInitialRender = false;
     private mFit: Fit;
     private mSize: Vector;
