@@ -243,9 +243,7 @@ export default abstract class Control {
             child.stage.attachToDocument();
         }
         child.mParent = parent;
-        if (this.mAppliedTheme !== undefined) {
-            this.applySingleTheme(child);
-        }
+        child.applyTheme();
     }
 
     private finishRemovedChild(child: Control) {
