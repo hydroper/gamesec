@@ -1,5 +1,5 @@
 {
-  "name": "emptyProject.client",
+  "name": "apiplay.client",
   "version": "0.1.0",
   "scripts": {
     "debug": "npx webpack serve -c webpack/development.config.js",

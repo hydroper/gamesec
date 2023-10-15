@@ -1,6 +1,6 @@
 import Input from "./input/Input";
 export { Input };
-export {
+export type {
     InputActionAtom,
     InputActionKey,
     InputActionKeyName,

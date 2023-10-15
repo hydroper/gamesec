@@ -168,10 +168,13 @@ export default class Input {
             if (item.hasOwnProperty("key")) {
                 const inputActionKey = item as InputActionKey;
                 const pressedState = Input.mPressedStatePoolKeys.get(inputActionKey.key);
-                return pressedState !== undefined && pressedState.pressed
+                const pressed = pressedState !== undefined && pressedState.pressed
                     && (inputActionKey.control ? pressedState.control : !pressedState.control)
                     && (inputActionKey.shift ? pressedState.shift : !pressedState.shift)
                     && (inputActionKey.alt ? pressedState.alt : !pressedState.alt);
+                if (pressed) {
+                    return true;
+                }
             }
         }
         return false;
